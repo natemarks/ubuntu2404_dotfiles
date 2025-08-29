@@ -1,0 +1,17 @@
+.idea
+.vscode
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+bashrc.d/work_aliases.sh
+
+# ignore downloaded deb files
+*.deb
+**/zsh_history
+loremipsum.txt
+nvim-linux64.tar.gz*
+nvim-linux64/

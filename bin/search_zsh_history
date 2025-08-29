@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+awk -F';' '{print $2}' < ~/zsh_history | sort | uniq -u | fzf
