@@ -1,0 +1,19 @@
+# shellcheck disable=SC2148
+if [ -d "$HOME"/bashrc.d ]; then
+  for i in "$HOME"/bashrc.d/*.sh; do
+    if [ -r "$i" ]; then
+# shellcheck disable=SC1090
+      . "$i"
+    fi
+  done
+  unset i
+fi
+if [ -d "$HOME"/commonrc.d ]; then
+  for i in "$HOME"/commonrc.d/*.sh; do
+    if [ -r "$i" ]; then
+# shellcheck disable=SC1090
+      . "$i"
+    fi
+  done
+  unset i
+fi

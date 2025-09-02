@@ -77,8 +77,6 @@ $(HOME)/projects: ## make sure $HOME/tmp
 home: bin $(HOME)/tmp $(HOME)/projects ## configure home directory
 
 powerline: ## install and configure powerline
-	pip3 install --user powerline-status
-	pip3 install --user powerline-gitstatus
 	$(MKDIR) $(POWERLINE)/colorschemes
 	$(MKDIR) $(POWERLINE)/themes/shell
 	$(LN) $(PRJ)/powerline/colorschemes_default.json  $(POWERLINE)/colorschemes/default.json
@@ -175,7 +173,10 @@ packages: ## install required packages
 	xclip \
 	bat \
 	eza \
-	heif-gdk-pixbuf;
+	heif-gdk-pixbuf \
+	python3-pip \
+	python3-powerline \
+	python3-powerline-gitstatus;
 
 vscode: ## install vscode
 	bash scripts/install_vscode.
