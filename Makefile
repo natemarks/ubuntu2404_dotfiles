@@ -106,13 +106,15 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/docker.sh $(BASHRCD)/docker.sh
 	$(LN) $(PRJ)/bashrc.d/kubectl_autocomplete.sh $(BASHRCD)/kubectl_autocomplete.sh
 	$(LN) $(PRJ)/bashrc.d/pyenv.sh $(BASHRCD)/pyenv.sh
-	-$(LN) $(PRJ)/bashrc.d/work_aliases.sh $(BASHRCD)/work_aliases.sh
 	sed -i.$(EPOCH) '/\.bashrc\.local/d' $(HOME)/.bashrc
 	echo '. $(HOME)/.bashrc.local' >> $(HOME)/.bashrc
 	$(LN) $(PRJ)/bashrc.local $(HOME)/.bashrc.local
 
 gitconfig: ## deploy user gitconfig
 	$(LN) $(PRJ)/gitconfig $(HOME)/.gitconfig
+
+kubectl: ## install kubectl
+	bash scripts/install_kubectl.sh
 
 stayback: ## configure stayback
 	$(MKDIR) $(HOME)/.stayback
@@ -174,6 +176,7 @@ packages: ## install required packages
 	bat \
 	eza \
 	heif-gdk-pixbuf \
+	powerline \
 	python3-pip \
 	python3-powerline \
 	python3-powerline-gitstatus;
@@ -233,4 +236,4 @@ undo_edits: ## the build process has to edit files. run this to put things back
 
 remove-all: rm-bash rm-gpg rm-powerline rm-ssh-config rm-gitconfig ## destroy everything you love
 
-all: packages bin powerline bash gitconfig ssh-config ## configure everything
+all: packages bin powerline bash gitconfig ssh-config kubectl pyenv ## configure everything
