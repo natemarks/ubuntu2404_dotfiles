@@ -42,10 +42,7 @@ awscli_v2: ## download and install awscliv2
 docker: ## install docker
 	bash scripts/install_docker.sh
 
-packer: ## install docker
-	bash scripts/install_packer.sh
-
-slack: ## install slack
+packer: ## install docker/home/natepm/.config/powerline/themes/shell/default_leftonly.json
 
 bin: ## create and configure $HOME/bin
 	$(MKDIR) $(HOME)/bin
@@ -77,10 +74,9 @@ $(HOME)/projects: ## make sure $HOME/tmp
 home: bin $(HOME)/tmp $(HOME)/projects ## configure home directory
 
 powerline: ## install and configure powerline
-	$(MKDIR) $(POWERLINE)/colorschemes
-	$(MKDIR) $(POWERLINE)/themes/shell
-	$(LN) $(PRJ)/powerline/colorschemes_default.json  $(POWERLINE)/colorschemes/default.json
-	$(LN) $(PRJ)/powerline/themes_shell_default.json  $(POWERLINE)/themes/shell/default.json
+	$(MKDIR) $(POWERLINE)
+	cp -R $(PRJ)/powerline/themes $(POWERLINE)
+	cp -R $(PRJ)/powerline/colorschemes $(POWERLINE)
 
 bash: ## configure bash environment
 	$(MKDIR) $(BASHRCD)
@@ -236,4 +232,4 @@ undo_edits: ## the build process has to edit files. run this to put things back
 
 remove-all: rm-bash rm-gpg rm-powerline rm-ssh-config rm-gitconfig ## destroy everything you love
 
-all: packages bin powerline bash gitconfig ssh-config kubectl pyenv ## configure everything
+all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit ## configure everything
