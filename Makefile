@@ -6,6 +6,7 @@ PRJ := $(PWD)
 COMMIT := $(shell git rev-parse HEAD)
 BIN = $(HOME)/bin
 BASHRCD = $(HOME)/bashrc.d
+HOMETMP = $(HOME)/tmp
 POWERLINE = $(HOME)/.config/powerline
 # OS = 'Darwin' or 'Linux'
 OS = $(shell uname -s)
@@ -80,6 +81,7 @@ powerline: ## install and configure powerline
 
 bash: ## configure bash environment
 	$(MKDIR) $(BASHRCD)
+	$(MKDIR) $(HOMETMP)
 	# some desc
 	$(LN) $(PRJ)/bashrc.d/add_home_bin_to_path.sh  $(BASHRCD)/add_home_bin_to_path.sh
 	$(LN) $(PRJ)/bashrc.d/rustup_path.sh  $(BASHRCD)/rustup_path.sh
