@@ -43,6 +43,9 @@ awscli_v2: ## download and install awscliv2
 docker: ## install docker
 	bash scripts/install_docker.sh
 
+golang: ## install golang
+	bash scripts/install_go.sh
+
 packer: ## install docker/home/natepm/.config/powerline/themes/shell/default_leftonly.json
 
 bin: ## create and configure $HOME/bin
@@ -189,6 +192,8 @@ $(HOME)/.tmux/plugins/tpm: ## clone tmux-plugins
 $(HOME)/.tmux.conf: $(HOME)/.tmux/plugins/tpm ## configure tmux
 	$(LN) $(PRJ)/tmux/tmux.conf $(HOME)/.tmux.conf
 
+config_tmux: $(HOME)/.tmux.conf
+
 delete_neovim: ## delete neovim config
 	-rm -rf $(HOME)/.config/nvim
 	-rm -rf $(HOME)/.local/share/nvim
@@ -234,4 +239,4 @@ undo_edits: ## the build process has to edit files. run this to put things back
 
 remove-all: rm-bash rm-gpg rm-powerline rm-ssh-config rm-gitconfig ## destroy everything you love
 
-all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit ## configure everything
+all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit golang docker ## configure everything

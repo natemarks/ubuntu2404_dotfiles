@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-GO_VERSION="1.23.10"
+GO_VERSION="1.25.1"
 
 mkdir -p ~/bin/go/"${GO_VERSION}"
 curl -L  "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
