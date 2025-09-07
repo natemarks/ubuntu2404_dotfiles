@@ -102,4 +102,11 @@ Do you really want to set this key to ultimate trust? (y/N) y
 
 ```bash
 
+pyenv instal 3.13.7
+pyenv global 3.13.7
 ```
+install go
+install docker
+
+install neovim
+install kickstart

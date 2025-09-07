@@ -239,4 +239,4 @@ undo_edits: ## the build process has to edit files. run this to put things back
 
 remove-all: rm-bash rm-gpg rm-powerline rm-ssh-config rm-gitconfig ## destroy everything you love
 
-all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit golang docker ## configure everything
+all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit golang docker nodejs ## configure everything
