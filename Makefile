@@ -104,6 +104,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/temp_aliases.sh  $(BASHRCD)/temp_aliases.sh
 	$(LN) $(PRJ)/bashrc.d/terragrunt_aliases.sh  $(BASHRCD)/terragrunt_aliases.sh
 	$(LN) $(PRJ)/bashrc.d/tmux_aliases.sh $(BASHRCD)/tmux_aliases.sh
+	$(LN) $(PRJ)/bashrc.d/flatpak.sh $(BASHRCD)/flatpak.sh
 	$(LN) $(PRJ)/bashrc.d/docker.sh $(BASHRCD)/docker.sh
 	$(LN) $(PRJ)/bashrc.d/kubectl_autocomplete.sh $(BASHRCD)/kubectl_autocomplete.sh
 	$(LN) $(PRJ)/bashrc.d/pyenv.sh $(BASHRCD)/pyenv.sh
