@@ -3,6 +3,10 @@
 # https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
 # add a gnome terminal profile to use the downloaded fonts
 # https://stackoverflow.com/questions/72184554/how-to-fix-nvchad-not-displaying-icons
+#  use cli like this
+# dconf list /org/gnome/terminal/legacy/profiles:/
+# dconf read /org/gnome/terminal/legacy/profiles:/:63373ff2-1bef-453e-9a6c-611dcae82fd3/visible-name
+# dconf write /org/gnome/terminal/legacy/profiles:/:63373ff2-1bef-453e-9a6c-611dcae82fd3/font "'JetBrainsMonoNL Nerd Font Mono 12'"
 set -Eeuo pipefail
 
 VERSION="3.2.1"
