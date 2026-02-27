@@ -93,6 +93,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/aws_functions.sh $(BASHRCD)/aws_functions.sh
 	$(LN) $(PRJ)/bashrc.d/bash_functions.sh $(BASHRCD)/bash_functions.sh
 	$(LN) $(PRJ)/bashrc.d/bash_powerline.sh $(BASHRCD)/bash_powerline.sh
+	$(LN) $(PRJ)/bashrc.d/bash_settings.sh $(BASHRCD)/bash_settings.sh
 	$(LN) $(PRJ)/bashrc.d/editor.sh  $(BASHRCD)/editor.sh
 	$(LN) $(PRJ)/bashrc.d/fzf.sh  $(BASHRCD)/fzf.sh
 	$(LN) $(PRJ)/bashrc.d/git_aliases.sh $(BASHRCD)/git_aliases.sh
