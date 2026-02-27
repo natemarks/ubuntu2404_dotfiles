@@ -142,6 +142,7 @@ packages: ## install required packages
 	make \
 	wget \
 	zip \
+	vlc \
 	unzip \
 	nautilus-admin \
 	fzf \
