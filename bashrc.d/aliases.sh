@@ -16,7 +16,7 @@ alias cdnv='cd ~/.config/nvim/'
 # ~/go/... is a part of the deprecated GOPATH config superceded by go modules
 # https://insujang.github.io/2020-04-04/go-modules/
 # alias cdp='cd $(find ~/projects ~/go/src -maxdepth 2 -type d | fzf)'
-alias vim='nvim'
+alias vim='nv'
 # use vscode in current directory
 alias vcc='code -n .'
 # open project in vscode using fzf
