@@ -139,6 +139,7 @@ packages: ## install required packages
 	curl \
 	git \
 	tree \
+	fd-find \
 	make \
 	wget \
 	zip \
