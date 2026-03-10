@@ -156,6 +156,7 @@ packages: ## install required packages
 	uuid-runtime \
 	tmux \
 	shellcheck \
+	shfmt \
 	hunspell \
 	build-essential \
 	libssl-dev \
