@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: gitconfig vim powerline neovim bin
+.PHONY: gitconfig vim powerline neovim bin gh
 DEFAULT_BRANCH := main
 SHELL := /bin/bash
 PRJ := $(PWD)
@@ -118,6 +118,9 @@ gitconfig: ## deploy user gitconfig
 
 kubectl: ## install kubectl
 	bash scripts/install_kubectl.sh
+
+gh: ## install github cli
+	bash scripts/install_gh_cli.sh
 
 stayback: ## configure stayback
 	$(MKDIR) $(HOME)/.stayback
