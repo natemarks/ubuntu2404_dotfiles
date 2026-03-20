@@ -6,6 +6,7 @@ VERSION="0.1.2"
 EXECUTABLE="lokeys"
 BIN_DIR="${HOME}/bin"
 TARBALL="${EXECUTABLE}_v${VERSION}_linux_amd64.tar.gz"
+ARCHIVE_DIR="${EXECUTABLE}_v${VERSION}_linux_amd64"
 URL="https://github.com/natemarks/lokeys/releases/download/v${VERSION}/${TARBALL}"
 
 if [ $# -eq 1 ] && [ "$1" = "delete" ]; then
@@ -16,7 +17,7 @@ mkdir -p "${BIN_DIR}"
 
 if [ ! -f "${BIN_DIR}/${EXECUTABLE}" ]; then
 	curl -sSLo "${BIN_DIR}/${TARBALL}" "${URL}"
-	tar xf "${BIN_DIR}/${TARBALL}" -C "${BIN_DIR}" "${EXECUTABLE}"
+	tar xf "${BIN_DIR}/${TARBALL}" -C "${BIN_DIR}" --strip-components=1 "${ARCHIVE_DIR}/${EXECUTABLE}"
 	chmod +x "${BIN_DIR}/${EXECUTABLE}"
 	rm -f "${BIN_DIR}/${TARBALL}"
 fi
