@@ -151,6 +151,7 @@ packages: ## install required packages
 	unzip \
 	nautilus-admin \
 	fzf \
+	hugo \
 	ripgrep \
 	silversearcher-ag \
 	jq \
