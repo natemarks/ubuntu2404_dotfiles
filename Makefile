@@ -68,6 +68,8 @@ bin: ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/prune_grep.sh $(HOME)/bin/prune_grep.sh
 	-rm -f $(HOME)/bin/delete_chars.sh
 	$(LN) $(PRJ)/bin/delete_chars.sh $(HOME)/bin/delete_chars.sh
+	-rm -f $(HOME)/bin/safe_git_pull.sh
+	$(LN) $(PRJ)/bin/safe_git_pull.sh $(HOME)/bin/safe_git_pull.sh
 
 $(HOME)/tmp: ## make sure $HOME/tmp
 	$(MKDIR) $(HOME)/tmp
