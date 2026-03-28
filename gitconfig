@@ -5,3 +5,5 @@
 	name = Nate Marks
 [core]
 	editor = nv -f
+[push]
+	autoSetupRemote = true
