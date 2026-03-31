@@ -2,7 +2,7 @@
 set -Eeuo pipefail
 
 # https://github.com/natemarks/lokeys/releases/download/v0.1.2/lokeys_v0.1.2_linux_amd64.tar.gz
-VERSION="0.1.7"
+VERSION="0.1.8"
 EXECUTABLE="lokeys"
 BIN_DIR="${HOME}/bin"
 TARBALL="${EXECUTABLE}_v${VERSION}_linux_amd64.tar.gz"
