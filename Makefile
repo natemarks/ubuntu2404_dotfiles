@@ -62,8 +62,8 @@ bin: ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/symm_decrypt.sh $(HOME)/bin/symm_decrypt
 	-rm -f $(HOME)/bin/aws_instance_id_from_private_ip.sh
 	$(LN) $(PRJ)/bin/aws_instance_id_from_private_ip.sh $(HOME)/bin/aws_instance_id_from_private_ip.sh
-	-rm -f $(HOME)/bin/upp-tmux.sh
-	$(LN) $(PRJ)/bin/upp-tmux.sh $(HOME)/bin/upp-tmux.sh
+	-rm -f $(HOME)/bin/tm-governance.sh
+	$(LN) $(PRJ)/bin/tm-governance.sh $(HOME)/bin/tm-governance.sh
 	-rm -f $(HOME)/bin/prune_grep.sh
 	$(LN) $(PRJ)/bin/prune_grep.sh $(HOME)/bin/prune_grep.sh
 	-rm -f $(HOME)/bin/delete_chars.sh
