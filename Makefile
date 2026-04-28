@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: gitconfig vim powerline neovim bin gh
+.PHONY: gitconfig vim powerline neovim bin gh tmux_plugins sesh gnome-terminal
 DEFAULT_BRANCH := main
 SHELL := /bin/bash
 PRJ := $(PWD)
@@ -70,6 +70,8 @@ bin: ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/delete_chars.sh $(HOME)/bin/delete_chars.sh
 	-rm -f $(HOME)/bin/safe_git_pull.sh
 	$(LN) $(PRJ)/bin/safe_git_pull.sh $(HOME)/bin/safe_git_pull.sh
+	-rm -f $(HOME)/bin/tmux-dev-setup
+	$(LN) $(PRJ)/bin/tmux-dev-setup $(HOME)/bin/tmux-dev-setup
 
 $(HOME)/tmp: ## make sure $HOME/tmp
 	$(MKDIR) $(HOME)/tmp
@@ -205,9 +207,19 @@ packages: ## install required packages
 rm-sesh: ## remove sesh config before replacing
 	-rm -rf $(HOME)/.config/sesh
 
-$(HOME)/.config/sesh/sesh.toml: ## configure sesh
-	$(MKDIR) -p $(HOME)/.config/sesh
+sesh: $(HOME)/.config/sesh/sesh.toml ## configure sesh
+
+$(HOME)/.config/sesh/sesh.toml:
+	$(MKDIR) $(HOME)/.config/sesh
+	-rm -f $(HOME)/.config/sesh/sesh.toml
 	$(LN) $(PRJ)/sesh/sesh.toml  $(HOME)/.config/sesh/sesh.toml
+
+gnome-terminal: ## configure gnome-terminal to use Nerd Font for icon support
+	@echo "Configuring gnome-terminal to use JetBrainsMono Nerd Font..."
+	@PROFILE=$$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \'); \
+	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ use-system-font false; \
+	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ font 'JetBrainsMono Nerd Font Mono 12'
+	@echo "Done! Open a new gnome-terminal window to see the changes."
 
 vscode: ## install vscode
 	bash scripts/install_vscode.
@@ -219,7 +231,11 @@ $(HOME)/.tmux/plugins/tpm: ## clone tmux-plugins
 $(HOME)/.tmux.conf: $(HOME)/.tmux/plugins/tpm ## configure tmux
 	$(LN) $(PRJ)/tmux/tmux.conf $(HOME)/.tmux.conf
 
-config_tmux: $(HOME)/.tmux.conf
+tmux_plugins: $(HOME)/.tmux/plugins/tpm ## install or update tmux plugins
+	@echo "Installing tmux plugins..."
+	$(HOME)/.tmux/plugins/tpm/bin/install_plugins
+
+config_tmux: $(HOME)/.tmux.conf tmux_plugins
 
 delete_neovim: ## delete neovim config
 	-rm -rf $(HOME)/.config/nvim
@@ -266,4 +282,4 @@ undo_edits: ## the build process has to edit files. run this to put things back
 
 remove-all: rm-bash rm-gpg rm-powerline rm-ssh-config rm-gitconfig ## destroy everything you love
 
-all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit golang docker nodejs ## configure everything
+all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit golang docker nodejs sesh ## configure everything

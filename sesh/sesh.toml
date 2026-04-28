@@ -6,21 +6,10 @@ dir_length = 3
 [[session]]
 name = "Downloads 📥"
 path = "~/Downloads"
-startup_command = "ls"
+startup_command = "yazi"
 
 [[session]]
-name = "aws-governance "
-path = "~/projects/aws-governance"
-startup_command = "dev_setup"
-
-[[session]]
-name = "Dotfiles ⚙️"
-path = "~/projects/dotfiles"
-startup_command = "dev_setup"
-
-
-[[session]]
-name = "findings automation "
-path = "~/projects/findings-automation"
-startup_command = "dev_setup"
+name = "Ubuntu 24_04 Dotfiles ⚙️"
+path = "~/projects/ubuntu2404_dotfiles"
+startup_command = "tmux-dev-setup"
 
