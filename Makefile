@@ -101,6 +101,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/git_aliases.sh $(BASHRCD)/git_aliases.sh
 	$(LN) $(PRJ)/bashrc.d/git_functions.sh $(BASHRCD)/git_functions.sh
 	$(LN) $(PRJ)/bashrc.d/go.sh $(BASHRCD)/go.sh
+	$(LN) $(PRJ)/bashrc.d/npm.sh $(BASHRCD)/npm.sh
 	$(LN) $(PRJ)/bashrc.d/ohmyzsh_git_aliases.sh  $(BASHRCD)/ohmyzsh_git_aliases.sh
 	$(LN) $(PRJ)/bashrc.d/packer.sh $(BASHRCD)/packer.sh
 	$(LN) $(PRJ)/bashrc.d/ssh_aliases.sh $(BASHRCD)/ssh_aliases.sh

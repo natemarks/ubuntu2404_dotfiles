@@ -2,18 +2,18 @@
 OS="$(uname -s)"
 function  fzf_completion() {
   if [ "$OS" = "Darwin" ]; then
-    find /usr/local/Cellar/fzf -type f -name completion.bash
+    find /usr/local/Cellar/fzf -type f -name completion.bash | head -n 1
   else
-    find /usr/share/doc/fzf -type f -name completion.bash
+    echo "/usr/share/doc/fzf/completion.bash"
   fi
 }
 
 
 function  fzf_key-bindings() {
   if [ "$OS" = "Darwin" ]; then
-    find /usr/local/Cellar/fzf -type f -name key-bindings.bash
+    find /usr/local/Cellar/fzf -type f -name key-bindings.bash | head -n 1
   else
-    find /usr/share/doc/fzf -type f -name key-bindings.bash
+    echo "/usr/share/doc/fzf/key-bindings.bash"
   fi
 }
 # Auto-completion
