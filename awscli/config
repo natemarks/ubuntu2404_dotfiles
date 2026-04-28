@@ -13,3 +13,12 @@ output = json
 [profile personal]
 region = us-east-1
 output = json
+
+[profile claude-code]
+sso_start_url = https://imprivata.awsapps.com/start/#
+sso_region = us-east-1
+sso_account_id = 368310207169
+sso_role_name = SandboxPowerUser
+region = us-east-1
+output = json
+

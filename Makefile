@@ -106,6 +106,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/ssh_aliases.sh $(BASHRCD)/ssh_aliases.sh
 	$(LN) $(PRJ)/bashrc.d/temp_aliases.sh  $(BASHRCD)/temp_aliases.sh
 	$(LN) $(PRJ)/bashrc.d/terragrunt_aliases.sh  $(BASHRCD)/terragrunt_aliases.sh
+	$(LN) $(PRJ)/bashrc.d/zoxide.sh $(BASHRCD)/zoxide.sh
 	$(LN) $(PRJ)/bashrc.d/tmux_aliases.sh $(BASHRCD)/tmux_aliases.sh
 	$(LN) $(PRJ)/bashrc.d/flatpak.sh $(BASHRCD)/flatpak.sh
 	$(LN) $(PRJ)/bashrc.d/docker.sh $(BASHRCD)/docker.sh
@@ -189,10 +190,23 @@ packages: ## install required packages
 	bat \
 	eza \
 	heif-gdk-pixbuf \
+	ffmpeg \
+	p7zip-full \
+	p7zip-rar \
+	poppler-utils \
+	fd-find \
+	imagemagick \
 	powerline \
 	python3-pip \
 	python3-powerline \
 	python3-powerline-gitstatus;
+
+rm-sesh: ## remove sesh config before replacing
+	-rm -rf $(HOME)/.config/sesh
+
+$(HOME)/.config/sesh/sesh.toml: ## configure sesh
+	$(MKDIR) -p $(HOME)/.config/sesh
+	$(LN) $(PRJ)/sesh/sesh.toml  $(HOME)/.config/sesh/sesh.toml
 
 vscode: ## install vscode
 	bash scripts/install_vscode.
