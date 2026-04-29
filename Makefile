@@ -20,6 +20,11 @@ LNF = ln -vsf
 help: ## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+configure_npm: ## configure npm to use a different bin and cache directory
+	$(MKDIR) $(HOME)/.npm-global
+	npm config set cache $(HOME)/.npm-global
+	npm config set prefix '~/.npm-global'
+
 nodejs: ## Install NodeJS
 	curl -sL https://deb.nodesource.com/setup_22.x | sudo bash -;
 	sudo apt -y install nodejs
@@ -29,7 +34,7 @@ spotify: ## Install spotify repo and package
 	echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list;
 	sudo apt-get update && sudo apt-get install -y spotify-client
 
-aws_cdk: nodejs ## Install AWS CDK
+aws_cdk: nodejs configure_npm ## Install AWS CDK
 	sudo npm install -g aws-cdk
 
 pyenv: ## install pyenv
@@ -220,6 +225,9 @@ gnome-terminal: ## configure gnome-terminal to use Nerd Font for icon support
 	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ use-system-font false; \
 	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ font 'JetBrainsMono Nerd Font Mono 12'
 	@echo "Done! Open a new gnome-terminal window to see the changes."
+
+claude: nodejs configure_npm ## install claude cli
+	npm install -g @anthropic/claude-cli
 
 vscode: ## install vscode
 	bash scripts/install_vscode.
