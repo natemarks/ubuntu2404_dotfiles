@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Keyboard remapping setup
+# - Maps CapsLock to Control
+# - Makes tapped Control emit Escape (requires xcape)
+
+# reset keyboard options
+setxkbmap -option
+
+# map CapsLock -> Control
+setxkbmap -option ctrl:nocaps
+
+# kill existing xcape instances
+pkill xcape 2>/dev/null
+
+# tapped Control emits Escape
+xcape -e 'Control_L=Escape'

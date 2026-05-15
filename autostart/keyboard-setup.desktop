@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Keyboard Setup
+Comment=Configure keyboard mappings (CapsLock->Control, tapped Control->Escape)
+Exec=/home/natepm/bin/keyboard-setup
+Terminal=false
+X-GNOME-Autostart-enabled=true

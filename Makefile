@@ -77,12 +77,19 @@ bin: ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/safe_git_pull.sh $(HOME)/bin/safe_git_pull.sh
 	-rm -f $(HOME)/bin/tmux-dev-setup
 	$(LN) $(PRJ)/bin/tmux-dev-setup $(HOME)/bin/tmux-dev-setup
+	-rm -f $(HOME)/bin/keyboard-setup
+	$(LN) $(PRJ)/bin/keyboard-setup $(HOME)/bin/keyboard-setup
 
 $(HOME)/tmp: ## make sure $HOME/tmp
 	$(MKDIR) $(HOME)/tmp
 
 $(HOME)/projects: ## make sure $HOME/tmp
 	$(MKDIR) $(HOME)/projects
+
+keyboard-autostart: ## configure keyboard setup to run on login
+	$(MKDIR) $(HOME)/.config/autostart
+	-rm -f $(HOME)/.config/autostart/keyboard-setup.desktop
+	$(LN) $(PRJ)/autostart/keyboard-setup.desktop $(HOME)/.config/autostart/keyboard-setup.desktop
 
 home: bin $(HOME)/tmp $(HOME)/projects ## configure home directory
 
@@ -195,6 +202,7 @@ packages: ## install required packages
 	python3.12-venv \
 	postgresql-client \
 	xclip \
+	xcape \
 	bat \
 	eza \
 	heif-gdk-pixbuf \
