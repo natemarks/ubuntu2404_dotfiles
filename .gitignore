@@ -15,3 +15,5 @@ bashrc.d/work_aliases.sh
 loremipsum.txt
 nvim-linux64.tar.gz*
 nvim-linux64/
+
+bin/whisper-stream

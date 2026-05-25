@@ -53,7 +53,7 @@ golang: ## install golang
 
 packer: ## install docker/home/natepm/.config/powerline/themes/shell/default_leftonly.json
 
-bin: ## create and configure $HOME/bin
+bin: ./bin/whisper-stream ## create and configure $HOME/bin
 	$(MKDIR) $(HOME)/bin
 	-rm -f $(HOME)/bin/encrypt
 	$(LN) $(PRJ)/bin/encrypt $(HOME)/bin/encrypt
@@ -81,6 +81,8 @@ bin: ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/keyboard-setup $(HOME)/bin/keyboard-setup
 	-rm -f $(HOME)/bin/t-kill
 	$(LN) $(PRJ)/bin/t-kill $(HOME)/bin/t-kill
+	-rm -f $(HOME)/bin/whisper-stream
+	$(LN) $(PRJ)/bin/whisper-stream $(HOME)/bin/whisper-stream
 
 $(HOME)/tmp: ## make sure $HOME/tmp
 	$(MKDIR) $(HOME)/tmp
@@ -183,6 +185,8 @@ packages: ## install required packages
 	shfmt \
 	hunspell \
 	build-essential \
+	cmake \
+	libsdl2-dev \
 	libssl-dev \
 	zlib1g-dev \
 	libbz2-dev \
@@ -272,6 +276,12 @@ lazygit: ## install lazygit
 
 ec2list: ## install ec2list
 	bash scripts/install_ec2list.sh
+
+./bin/whisper-stream: packages ## install whisper.cpp (whisper-stream for voice transcription)
+	bash scripts/install_whisper.sh
+
+whisper-clean: ## remove whisper.cpp installation
+	bash scripts/install_whisper.sh delete
 
 ssh-config: ## ssh config
 	$(LN) $(PRJ)/ssh/config  $(HOME)/.ssh/config
