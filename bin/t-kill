@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Interactive tmux session killer using fzf
+
+# Check if tmux is running
+if ! tmux list-sessions &>/dev/null; then
+  echo "Error: No tmux sessions found" >&2
+  exit 1
+fi
+
+# Check if fzf is available
+if ! command -v fzf &>/dev/null; then
+  echo "Error: fzf is not installed" >&2
+  exit 1
+fi
+
+# Get list of sessions and let user select one with fzf
+session=$(tmux list-sessions -F "#{session_name}" | fzf --prompt="Kill session: " --height=40% --reverse)
+
+# Exit if user cancelled (no selection)
+if [[ -z "$session" ]]; then
+  echo "No session selected"
+  exit 0
+fi
+
+# Kill the selected session
+if tmux kill-session -t "$session"; then
+  echo "Killed session: $session"
+else
+  echo "Error: Failed to kill session $session" >&2
+  exit 1
+fi

@@ -13,6 +13,9 @@ alias tn='tmux new-session'
 # Lists all ongoing sessions
 alias tl='tmux list-sessions'
 
+# Shows the current tmux session name
+alias ts='tmux display-message -p "#S"'
+
 # Interactive session selector using sesh and fzf with project directory picker
 function t() {
   {
