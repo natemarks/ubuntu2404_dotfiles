@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: gitconfig vim powerline neovim bin gh tmux_plugins sesh gnome-terminal whisper whisper-clean
+.PHONY: gitconfig vim powerline neovim bin gh tmux_plugins sesh gnome-terminal whisper whisper-clean bin/whisper-stream-bin
 DEFAULT_BRANCH := main
 SHELL := /bin/bash
 PRJ := $(PWD)
@@ -53,7 +53,7 @@ golang: ## install golang
 
 packer: ## install docker/home/natepm/.config/powerline/themes/shell/default_leftonly.json
 
-bin: bin/whisper-stream ## create and configure $HOME/bin
+bin: bin/whisper-stream-bin ## create and configure $HOME/bin
 	$(MKDIR) $(HOME)/bin
 	-rm -f $(HOME)/bin/encrypt
 	$(LN) $(PRJ)/bin/encrypt $(HOME)/bin/encrypt
@@ -81,9 +81,13 @@ bin: bin/whisper-stream ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/keyboard-setup $(HOME)/bin/keyboard-setup
 	-rm -f $(HOME)/bin/t-kill
 	$(LN) $(PRJ)/bin/t-kill $(HOME)/bin/t-kill
-	@if [ -f $(PRJ)/bin/whisper-stream ]; then \
+	@if [ -f $(PRJ)/bin/whisper-stream-wrapper.sh ]; then \
 		rm -f $(HOME)/bin/whisper-stream; \
-		$(LN) $(PRJ)/bin/whisper-stream $(HOME)/bin/whisper-stream; \
+		$(LN) $(PRJ)/bin/whisper-stream-wrapper.sh $(HOME)/bin/whisper-stream; \
+	fi
+	@if [ -d $(PRJ)/bin/models ]; then \
+		rm -rf $(HOME)/bin/models; \
+		$(LN) $(PRJ)/bin/models $(HOME)/bin/models; \
 	fi
 
 $(HOME)/tmp: ## make sure $HOME/tmp
@@ -279,14 +283,16 @@ lazygit: ## install lazygit
 ec2list: ## install ec2list
 	bash scripts/install_ec2list.sh
 
-bin/whisper-stream: ## install whisper.cpp (whisper-stream for voice transcription)
+bin/whisper-stream-bin: ## install whisper.cpp (whisper-stream for voice transcription)
 	bash scripts/install_whisper.sh
 
-whisper: bin/whisper-stream ## convenience target for whisper installation
+whisper: bin/whisper-stream-bin ## convenience target for whisper installation
 
 whisper-clean: ## remove whisper.cpp installation
 	bash scripts/install_whisper.sh delete
-	-rm -f bin/whisper-stream
+	-rm -f bin/whisper-stream-bin
+	-rm -f bin/whisper-stream-wrapper.sh
+	-rm -f $(HOME)/bin/whisper-stream
 
 ssh-config: ## ssh config
 	$(LN) $(PRJ)/ssh/config  $(HOME)/.ssh/config

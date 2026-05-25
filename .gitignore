@@ -16,4 +16,5 @@ loremipsum.txt
 nvim-linux64.tar.gz*
 nvim-linux64/
 
-bin/whisper-stream
+bin/whisper-stream-bin
+bin/models/
