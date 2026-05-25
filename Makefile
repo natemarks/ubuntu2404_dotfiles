@@ -79,6 +79,8 @@ bin: ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/tmux-dev-setup $(HOME)/bin/tmux-dev-setup
 	-rm -f $(HOME)/bin/keyboard-setup
 	$(LN) $(PRJ)/bin/keyboard-setup $(HOME)/bin/keyboard-setup
+	-rm -f $(HOME)/bin/t-kill
+	$(LN) $(PRJ)/bin/t-kill $(HOME)/bin/t-kill
 
 $(HOME)/tmp: ## make sure $HOME/tmp
 	$(MKDIR) $(HOME)/tmp
