@@ -170,6 +170,8 @@ packages: ## install required packages
 	curl \
 	git \
 	tree \
+	feh \
+	exiftool \
 	fd-find \
 	make \
 	wget \
