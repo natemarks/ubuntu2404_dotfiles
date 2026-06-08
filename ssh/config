@@ -1,2 +1,2 @@
 AddKeysToAgent	yes
-IdentityFile ~/.ssh/nmarks_imprivata
+IdentityFile ~/.ssh/id_ed25519
