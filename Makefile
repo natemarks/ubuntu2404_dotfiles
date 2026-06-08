@@ -167,6 +167,7 @@ packages: ## install required packages
 	sudo add-apt-repository -y ppa:git-core/ppa;
 	sudo apt-get -y update;
 	sudo apt-get install -y \
+	usb-creator-gtk \
 	curl \
 	git \
 	tree \
