@@ -2,23 +2,20 @@
 region = us-east-1
 output = json
 
-[profile AdministratorAccess-709310380790]
-sso_start_url = https://imprivata.awsapps.com/start/#
+[sso-session imprivata]
+sso_start_url = https://imprivata.awsapps.com/start
 sso_region = us-east-1
-sso_account_id = 709310380790
-sso_role_name = AdministratorAccess
-region = us-east-1
-output = json
+sso_registration_scopes = sso:account:access
 
 [profile personal]
 region = us-east-1
 output = json
 
 [profile claude-code]
-sso_start_url = https://imprivata.awsapps.com/start/#
 sso_region = us-east-1
 sso_account_id = 368310207169
 sso_role_name = SandboxPowerUser
+sso_session = imprivata
 region = us-east-1
 output = json
 
