@@ -5,11 +5,11 @@ NVIM_VERSION="0.12.3"
 NVIM_SHA256SUM="c441b547142860bf01bcce39e36cbed185c41112813e15443b16e5237750724d"
 NVIM_TARBALL="nvim-linux-x86_64.tar.gz"
 NVIM_INSTALL_DIR="${HOME}/local/nvim-${NVIM_VERSION}"
-NVIM_BIN="${NVIM_INSTALL_DIR}/nvim-linux-x86_64/bin/nvim"
+NVIM_BIN="${NVIM_INSTALL_DIR}/bin/nvim"
 NVIM_LINK="${HOME}/bin/nv"
 
 # Man and share directories
-NVIM_SHARE_DIR="${NVIM_INSTALL_DIR}/nvim-linux-x86_64/share"
+NVIM_SHARE_DIR="${NVIM_INSTALL_DIR}/share"
 LOCAL_SHARE_DIR="${HOME}/.local/share"
 LOCAL_MAN_DIR="${HOME}/.local/share/man"
 
@@ -66,9 +66,18 @@ fi
 for item in "${NVIM_SHARE_DIR}"/*; do
   if [ -d "$item" ] && [ "$(basename "$item")" != "man" ]; then
     itemname=$(basename "$item")
-    rm -f "${LOCAL_SHARE_DIR}/${itemname}"
-    ln -s "$item" "${LOCAL_SHARE_DIR}/${itemname}"
-    echo "Symlinked ${itemname} to ${LOCAL_SHARE_DIR}/${itemname}"
+    target_path="${LOCAL_SHARE_DIR}/${itemname}"
+
+    # Skip if target is already a real directory (not a symlink)
+    if [ -d "$target_path" ] && [ ! -L "$target_path" ]; then
+      echo "Skipping ${itemname} (directory already exists at ${target_path})"
+      continue
+    fi
+
+    # Remove existing symlink or file, then create new symlink
+    rm -f "$target_path"
+    ln -s "$item" "$target_path"
+    echo "Symlinked ${itemname} to ${target_path}"
   fi
 done
 

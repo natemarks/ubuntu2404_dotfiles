@@ -33,8 +33,8 @@ remove_symlinks() {
   echo "Removing symlinks for neovim ${version}..."
 
   # Remove man page symlinks
-  if [ -d "${install_dir}/nvim-linux-x86_64/share/man" ]; then
-    for mandir in "${install_dir}/nvim-linux-x86_64/share/man"/*; do
+  if [ -d "${install_dir}/share/man" ]; then
+    for mandir in "${install_dir}/share/man"/*; do
       if [ -d "$mandir" ]; then
         section=$(basename "$mandir")
         for manpage in "$mandir"/*; do
@@ -52,8 +52,8 @@ remove_symlinks() {
   fi
 
   # Remove other share symlinks
-  if [ -d "${install_dir}/nvim-linux-x86_64/share" ]; then
-    for item in "${install_dir}/nvim-linux-x86_64/share"/*; do
+  if [ -d "${install_dir}/share" ]; then
+    for item in "${install_dir}/share"/*; do
       if [ -d "$item" ] && [ "$(basename "$item")" != "man" ]; then
         itemname=$(basename "$item")
         local link="${LOCAL_SHARE_DIR}/${itemname}"
@@ -81,6 +81,11 @@ if [ $# -ne 1 ]; then
 fi
 
 VERSION=$1
+
+# Handle help flag
+if [ "$VERSION" = "--help" ] || [ "$VERSION" = "-h" ]; then
+  usage
+fi
 
 if [ "$VERSION" = "all" ]; then
   echo "Removing all neovim installations..."
