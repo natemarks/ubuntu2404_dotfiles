@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Switch between installed neovim versions
+
+NVIM_LINK="${HOME}/bin/nv"
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") <version|--list>
+
+Switch the active neovim version by updating the ~/bin/nv symlink.
+
+Arguments:
+  version     Version to activate (e.g., 0.12.3)
+  --list      List all installed versions
+
+Examples:
+  $(basename "$0") 0.12.3    # Switch to neovim 0.12.3
+  $(basename "$0") --list    # Show all installed versions
+
+EOF
+  exit 1
+}
+
+list_versions() {
+  echo "Installed neovim versions:"
+  if [ -d "${HOME}/local" ]; then
+    local current_target=""
+    if [ -L "${NVIM_LINK}" ]; then
+      current_target=$(readlink "${NVIM_LINK}")
+    fi
+
+    for install_dir in "${HOME}/local"/nvim-*; do
+      if [ -d "$install_dir" ]; then
+        local version
+        version=$(basename "$install_dir" | sed 's/nvim-//')
+        local nvim_bin="${install_dir}/nvim-linux-x86_64/bin/nvim"
+
+        if [ -f "$nvim_bin" ]; then
+          if [[ "$current_target" == "$nvim_bin" ]]; then
+            echo "  * ${version} (active)"
+          else
+            echo "    ${version}"
+          fi
+        fi
+      fi
+    done
+  else
+    echo "  No installations found in ~/local"
+  fi
+}
+
+switch_version() {
+  local version=$1
+  local install_dir="${HOME}/local/nvim-${version}"
+  local nvim_bin="${install_dir}/nvim-linux-x86_64/bin/nvim"
+
+  if [ ! -d "$install_dir" ]; then
+    echo "Error: neovim version ${version} not found at ${install_dir}" >&2
+    echo "" >&2
+    list_versions
+    exit 1
+  fi
+
+  if [ ! -f "$nvim_bin" ]; then
+    echo "Error: neovim binary not found at ${nvim_bin}" >&2
+    exit 1
+  fi
+
+  # Update the symlink
+  rm -f "${NVIM_LINK}"
+  ln -s "$nvim_bin" "${NVIM_LINK}"
+
+  echo "Switched to neovim ${version}"
+  echo "Binary: ${nvim_bin}"
+  echo "Link: ${NVIM_LINK} -> ${nvim_bin}"
+  echo ""
+  echo "Run 'source ~/.bashrc' or start a new shell to update PATH"
+}
+
+# Parse arguments
+if [ $# -eq 0 ]; then
+  usage
+fi
+
+case "$1" in
+  --list|-l)
+    list_versions
+    ;;
+  --help|-h)
+    usage
+    ;;
+  *)
+    switch_version "$1"
+    ;;
+esac
