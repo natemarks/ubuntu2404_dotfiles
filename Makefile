@@ -81,6 +81,8 @@ bin: bin/whisper-stream-bin ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/keyboard-setup $(HOME)/bin/keyboard-setup
 	-rm -f $(HOME)/bin/t-kill
 	$(LN) $(PRJ)/bin/t-kill $(HOME)/bin/t-kill
+	-rm -f $(HOME)/bin/nv-switch
+	$(LN) $(PRJ)/bin/nv-switch $(HOME)/bin/nv-switch
 	@if [ -f $(PRJ)/bin/whisper-stream-wrapper.sh ]; then \
 		rm -f $(HOME)/bin/whisper-stream; \
 		$(LN) $(PRJ)/bin/whisper-stream-wrapper.sh $(HOME)/bin/whisper-stream; \
@@ -162,6 +164,7 @@ shellcheck: ## shellcheck project files. skip ohmyzsh_git_aliases.sh file
 	find . -type f -name "*.sh" ! -name 'ohmyzsh_git_aliases.sh' -exec "shellcheck" "--format=gcc" {} \;
 	shellcheck --format=gcc bin/encrypt
 	shellcheck --format=gcc bin/decrypt
+	shellcheck --format=gcc bin/nv-switch
 
 packages: ## install required packages
 	sudo add-apt-repository -y ppa:git-core/ppa;
@@ -279,6 +282,14 @@ reset_neovim_config: $(HOME)/.tmux.conf delete_neovim ## delete and re-copy the 
 neovim: $(HOME)/.tmux.conf ## install neovim
 	bash scripts/install_neovim.sh
 	@$(MAKE) reset_neovim_config
+
+uninstall_neovim: ## uninstall neovim version (make uninstall_neovim VERSION=0.12.3 or VERSION=all)
+	@if [ -z "$(VERSION)" ]; then \
+		echo "Error: VERSION is required. Usage: make uninstall_neovim VERSION=0.12.3"; \
+		echo "Use VERSION=all to remove all versions"; \
+		exit 1; \
+	fi
+	bash scripts/uninstall_neovim.sh $(VERSION)
 
 lazygit: ## install lazygit
 	bash scripts/install_lazygit.sh
