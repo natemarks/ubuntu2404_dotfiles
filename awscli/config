@@ -14,7 +14,7 @@ output = json
 [profile claude-code]
 sso_region = us-east-1
 sso_account_id = 368310207169
-sso_role_name = SandboxPowerUser
+sso_role_name = ClaudeCode-StandardUser
 sso_session = imprivata
 region = us-east-1
 output = json
