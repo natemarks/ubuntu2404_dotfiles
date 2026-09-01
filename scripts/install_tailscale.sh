@@ -7,7 +7,7 @@ if [ ! -f /etc/apt/keyrings/tailscale-archive-keyring.gpg ]
 then
   sudo mkdir -p /etc/apt/keyrings
   curl -fsSL \
-  https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | \
+  https://pkgs.tailscale.com/stable/ubuntu/noble.noarmor.gpg | \
   sudo tee /etc/apt/keyrings/tailscale-archive-keyring.gpg > /dev/null
 fi
 
@@ -15,7 +15,7 @@ if [ ! -f /etc/apt/sources.list.d/tailscale.list ]
 then
   echo \
   "deb [signed-by=/etc/apt/keyrings/tailscale-archive-keyring.gpg] \
-  https://pkgs.tailscale.com/stable/ubuntu focal main" | \
+  https://pkgs.tailscale.com/stable/ubuntu noble main" | \
   sudo tee /etc/apt/sources.list.d/tailscale.list > /dev/null
 fi
 
