@@ -7,13 +7,22 @@ sso_start_url = https://imprivata.awsapps.com/start
 sso_region = us-east-1
 sso_registration_scopes = sso:account:access
 
+[sso-session mantlepulse]
+sso_start_url = https://mantlepulse.awsapps.com/start
+sso_region = us-east-1
+sso_registration_scopes = sso:account:access
+
 [profile mp-mgmt]
-region = us-east-1
-output = json
+sso_region = us-east-1
+sso_account_id = 605560722292
+sso_role_name = CloudAdmin
+sso_session = mantlepulse
 
 [profile mp-workload]
-region = us-east-1
-output = json
+sso_region = us-east-1
+sso_account_id = 981825502827
+sso_role_name = CloudAdmin
+sso_session = mantlepulse
 
 [profile claude-code]
 sso_region = us-east-1
