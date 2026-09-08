@@ -40,3 +40,11 @@ sso_session = imprivata
 region = us-east-1
 output = json
 
+[profile claude-admin]
+sso_region = us-east-1
+sso_account_id = 368310207169
+sso_role_name = AWSAdministratorAccess
+sso_session = imprivata
+region = us-east-1
+output = json
+
