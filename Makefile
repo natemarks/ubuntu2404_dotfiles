@@ -233,7 +233,13 @@ packages: ## install required packages
 	powerline \
 	python3-pip \
 	python3-powerline \
-	python3-powerline-gitstatus;
+	python3-powerline-gitstatus; \
+	ARCH=$$(uname -m); \
+	if [[ "$$ARCH" == "x86_64" ]]; then \
+		sudo apt-get install -y qemu-system-x86 ovmf virtiofsd; \
+	elif [[ "$$ARCH" == "aarch64" ]]; then \
+		sudo apt-get install -y qemu-system-arm qemu-efi-aarch64 virtiofsd; \
+	fi
 
 rm-sesh: ## remove sesh config before replacing
 	-rm -rf $(HOME)/.config/sesh
