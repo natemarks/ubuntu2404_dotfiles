@@ -139,6 +139,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/docker.sh $(BASHRCD)/docker.sh
 	$(LN) $(PRJ)/bashrc.d/kubectl_autocomplete.sh $(BASHRCD)/kubectl_autocomplete.sh
 	$(LN) $(PRJ)/bashrc.d/pyenv.sh $(BASHRCD)/pyenv.sh
+	$(LN) $(PRJ)/bashrc.d/claude.sh $(BASHRCD)/claude.sh
 	sed -i.$(EPOCH) '/\.bashrc\.local/d' $(HOME)/.bashrc
 	echo '. $(HOME)/.bashrc.local' >> $(HOME)/.bashrc
 	$(LN) $(PRJ)/bashrc.local $(HOME)/.bashrc.local
@@ -257,6 +258,10 @@ gnome-terminal: ## configure gnome-terminal to use Nerd Font for icon support
 	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ use-system-font false; \
 	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ font 'JetBrainsMono Nerd Font Mono 12'
 	@echo "Done! Open a new gnome-terminal window to see the changes."
+
+claude_config: ## symlink Claude Code settings from repo
+	-rm -f $(HOME)/.claude/settings.json
+	$(LN) $(PRJ)/claude/settings.json $(HOME)/.claude/settings.json
 
 claude: nodejs configure_npm ## install claude cli
 	npm install -g @anthropic/claude-cli
