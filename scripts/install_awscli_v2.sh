@@ -7,3 +7,6 @@ rm -f "${INSTALLER}"
 curl -o "${INSTALLER}" -L https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
 unzip "${INSTALLER}" -d "${UNZIP_DIR}"
 "${UNZIP_DIR}/aws/install"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+"${SCRIPT_DIR}/install_aws_cli_ssm_plugin.sh"
