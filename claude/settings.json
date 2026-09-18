@@ -1,10 +1,19 @@
 {
   "model": "claude-sonnet-5",
-  "effortLevel": "high",
-  "autoCompactEnabled": true,
-  "tui": "fullscreen",
   "enabledPlugins": {
     "mattpocock-skills@claude-plugins-official": true,
-    "miro@claude-plugins-official": true
-  }
+    "miro@claude-plugins-official": true,
+    "local-notes@mcp-local-notes": true
+  },
+  "extraKnownMarketplaces": {
+    "mcp-local-notes": {
+      "source": {
+        "source": "github",
+        "repo": "natemarks/mcp-local-notes"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "autoCompactEnabled": true
 }

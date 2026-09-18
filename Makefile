@@ -153,6 +153,9 @@ kubectl: ## install kubectl
 gh: ## install github cli
 	bash scripts/install_gh_cli.sh
 
+glow: ## install glow (markdown renderer)
+	bash scripts/install_glow.sh
+
 stayback: ## configure stayback
 	$(MKDIR) $(HOME)/.stayback
 	$(HOME)/bin/decrypt $(PWD)/stayback.json.gpg
