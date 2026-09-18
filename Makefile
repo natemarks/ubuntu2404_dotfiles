@@ -83,6 +83,8 @@ bin: bin/whisper-stream-bin ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/t-kill $(HOME)/bin/t-kill
 	-rm -f $(HOME)/bin/nv-switch
 	$(LN) $(PRJ)/bin/nv-switch $(HOME)/bin/nv-switch
+	-rm -f $(HOME)/bin/ec2_session.sh
+	$(LN) $(PRJ)/bin/ec2_session.sh $(HOME)/bin/ec2_session.sh
 	@if [ -f $(PRJ)/bin/whisper-stream-wrapper.sh ]; then \
 		rm -f $(HOME)/bin/whisper-stream; \
 		$(LN) $(PRJ)/bin/whisper-stream-wrapper.sh $(HOME)/bin/whisper-stream; \
