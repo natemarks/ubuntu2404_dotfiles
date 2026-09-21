@@ -6,6 +6,7 @@ FZF_OPTS=(--height=40% --border --prompt "Instance: ")
 
 INSTANCE_ID=$(
   aws ec2 describe-instances --output json \
+    --filters Name=instance-state-name,Values=running \
     | jq -r '
       .Reservations[].Instances[]
       | ((.Tags // []) | map(select(.Key=="Name").Value) | .[0] // "<no-name>") as $name

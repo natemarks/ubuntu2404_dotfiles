@@ -85,6 +85,8 @@ bin: bin/whisper-stream-bin ## create and configure $HOME/bin
 	$(LN) $(PRJ)/bin/nv-switch $(HOME)/bin/nv-switch
 	-rm -f $(HOME)/bin/ec2_session.sh
 	$(LN) $(PRJ)/bin/ec2_session.sh $(HOME)/bin/ec2_session.sh
+	-rm -f $(HOME)/bin/admin_merge_pr.sh
+	$(LN) $(PRJ)/bin/admin_merge_pr.sh $(HOME)/bin/admin_merge_pr.sh
 	@if [ -f $(PRJ)/bin/whisper-stream-wrapper.sh ]; then \
 		rm -f $(HOME)/bin/whisper-stream; \
 		$(LN) $(PRJ)/bin/whisper-stream-wrapper.sh $(HOME)/bin/whisper-stream; \
@@ -157,6 +159,9 @@ gh: ## install github cli
 
 glow: ## install glow (markdown renderer)
 	bash scripts/install_glow.sh
+
+ollama: ## install/update ollama (always overwrites with latest)
+	bash scripts/install_ollama.sh
 
 stayback: ## configure stayback
 	$(MKDIR) $(HOME)/.stayback
