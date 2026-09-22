@@ -240,6 +240,7 @@ packages: ## install required packages
 	p7zip-rar \
 	poppler-utils \
 	fd-find \
+	sshfs \
 	imagemagick \
 	powerline \
 	python3-pip \
