@@ -1,17 +1,22 @@
 # tmux
 
-BLOCKED:
-tmux throws an errro trying to use site packages from pyenv to configure powerline.  I need to figure out how to get the correct python version to be used in the tmux configuration.
+Prefix is `Ctrl-]` (`Ctrl-b` is unbound).
+
+## Setup
+
+```bash
+make packages      # tmux, fzf, fd-find, wl-clipboard / xclip
+make sesh          # install/upgrade sesh to the latest release, link ~/.config/sesh/sesh.toml
+make config_tmux   # clone tpm, link ~/.tmux.conf, install + update plugins
+```
+
+All three are safe to re-run. Re-run `make config_tmux` to update plugins, or
+`make install_sesh` to upgrade sesh.
 
 good resource:
 https://github.com/tmux-plugins/tmux-sensible
 
 https://www.youtube.com/watch?v=U-omALWIBos
-
-config file:
- - rebind the prefix to CTRL-a
- - unbind the CTRL-b prefix
-
 
 ## Examples
 
@@ -44,32 +49,35 @@ prefix + s
 ## Organizing 
 
 Tmux window is a grouping opf split panes. custom mappings make this a littel easier to manage.
-C-a s - list sessions
-C-a | - split the window vertically
-C-a - - split the window horizontally
+prefix t - sesh session picker
+prefix s - list sessions
+prefix | - split the window vertically
+prefix - - split the window horizontally
+prefix r - reload ~/.tmux.conf
 
+prefix J - expand pane down
+prefix K - expand pane up
+prefix H - expand pane left
+prefix L - expand pane right
 
-C-a j - expand pane down
-C-a k - expand pane up
-C-a h - expand pane left
-C-a l - expand pane right
+prefix m - toggle maximize pane
 
-C-a m - toggle maximize pane
+copy mode (vi keys): prefix [ , Space to start selecting, y to copy to the system clipboard
 
 
 ## managing plugins with tpm
 
 install plugins:
 ```bash
-C-a + I
+prefix + I
 ```
 
 update plugins ():
 ```bash
-C-a + U
+prefix + U
 ```
 
 remove unlisted plugins:
 ```bash
-C-a + alt + u
+prefix + alt + u
 ```

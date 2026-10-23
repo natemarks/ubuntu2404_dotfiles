@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: gitconfig vim powerline neovim bin gh tmux_plugins sesh gnome-terminal whisper whisper-clean bin/whisper-stream-bin
+.PHONY: gitconfig vim powerline neovim bin gh tmux_plugins sesh install_sesh config_tmux treesitter_cli neovim_config reset_neovim_config delete_neovim gnome-terminal nerdfonts ptyxis whisper whisper-clean bin/whisper-stream-bin
 DEFAULT_BRANCH := main
 SHELL := /bin/bash
 PRJ := $(PWD)
@@ -15,6 +15,7 @@ EPOCH = $(shell date +%s)
 MKDIR = mkdir -p
 LN = ln -vs
 LNF = ln -vsf
+TERMINAL_FONT = UbuntuSansMono Nerd Font Mono 11
 
 
 help: ## Show this help.
@@ -41,8 +42,9 @@ pyenv: ## install pyenv
 	-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
 awscli_v2: ## download and install awscliv2
-	-bash scripts/install_awscli_v2.sh
+	bash scripts/install_awscli_v2.sh
 	$(MKDIR) $(HOME)/.aws
+	-rm -f $(HOME)/.aws/config
 	$(LN) $(PRJ)/awscli/config  $(HOME)/.aws/config
 
 docker: ## install docker
@@ -186,7 +188,7 @@ packages: ## install required packages
 	git \
 	tree \
 	feh \
-	exiftool \
+	libimage-exiftool-perl \
 	fd-find \
 	make \
 	wget \
@@ -196,6 +198,7 @@ packages: ## install required packages
 	unzip \
 	nautilus-admin \
 	fzf \
+	zoxide \
 	hugo \
 	ripgrep \
 	silversearcher-ag \
@@ -228,16 +231,17 @@ packages: ## install required packages
 	software-properties-common \
 	gnupg \
 	lsb-release \
-	python3.12-venv \
+	python3-venv \
 	postgresql-client \
 	xclip \
+	wl-clipboard \
 	xcape \
 	bat \
 	eza \
 	heif-gdk-pixbuf \
 	ffmpeg \
-	p7zip-full \
-	p7zip-rar \
+	7zip \
+	7zip-rar \
 	poppler-utils \
 	fd-find \
 	sshfs \
@@ -256,18 +260,31 @@ packages: ## install required packages
 rm-sesh: ## remove sesh config before replacing
 	-rm -rf $(HOME)/.config/sesh
 
-sesh: $(HOME)/.config/sesh/sesh.toml ## configure sesh
+install_sesh: ## install or upgrade sesh to the latest release (pin with VERSION=x.y.z)
+	bash scripts/install_sesh.sh
+
+sesh: install_sesh $(HOME)/.config/sesh/sesh.toml ## install sesh and configure it
 
 $(HOME)/.config/sesh/sesh.toml:
 	$(MKDIR) $(HOME)/.config/sesh
 	-rm -f $(HOME)/.config/sesh/sesh.toml
 	$(LN) $(PRJ)/sesh/sesh.toml  $(HOME)/.config/sesh/sesh.toml
 
-gnome-terminal: ## configure gnome-terminal to use Nerd Font for icon support
-	@echo "Configuring gnome-terminal to use JetBrainsMono Nerd Font..."
+nerdfonts: ## install Nerd Fonts (powerline + icon glyphs) to ~/.fonts
+	bash scripts/install_nerdfonts.sh UbuntuSans
+
+# UbuntuSansMono matches the stock Ubuntu terminal spacing; JetBrains Mono is noticeably wider
+ptyxis: nerdfonts ## configure ptyxis (Ubuntu 25.10+ default terminal) to use a Nerd Font
+	gsettings set org.gnome.Ptyxis use-system-font false
+	gsettings set org.gnome.Ptyxis font-name '$(TERMINAL_FONT)'
+	@echo "Done! Fully quit ptyxis (menu > Quit, or: pkill -f 'ptyxis --gapplication-service') and reopen it;"
+	@echo "a running ptyxis does not see newly installed fonts."
+
+gnome-terminal: nerdfonts ## configure gnome-terminal to use Nerd Font for icon support
+	@echo "Configuring gnome-terminal to use $(TERMINAL_FONT)..."
 	@PROFILE=$$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \'); \
 	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ use-system-font false; \
-	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ font 'JetBrainsMono Nerd Font Mono 12'
+	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ font '$(TERMINAL_FONT)'
 	@echo "Done! Open a new gnome-terminal window to see the changes."
 
 claude_config: ## symlink Claude Code settings from repo
@@ -287,23 +304,36 @@ $(HOME)/.tmux/plugins/tpm: ## clone tmux-plugins
 $(HOME)/.tmux.conf: $(HOME)/.tmux/plugins/tpm ## configure tmux
 	$(LN) $(PRJ)/tmux/tmux.conf $(HOME)/.tmux.conf
 
-tmux_plugins: $(HOME)/.tmux/plugins/tpm ## install or update tmux plugins
+# tpm reads the plugin list from ~/.tmux.conf, so it must be linked first
+tmux_plugins: $(HOME)/.tmux.conf ## install or update tmux plugins
 	@echo "Installing tmux plugins..."
 	$(HOME)/.tmux/plugins/tpm/bin/install_plugins
+	$(HOME)/.tmux/plugins/tpm/bin/update_plugins all
 
-config_tmux: $(HOME)/.tmux.conf tmux_plugins
+config_tmux: $(HOME)/.tmux.conf tmux_plugins ## link tmux.conf, install tpm and tmux plugins
 
 delete_neovim: ## delete neovim config
 	-rm -rf $(HOME)/.config/nvim
 	-rm -rf $(HOME)/.local/share/nvim
 
-reset_neovim_config: $(HOME)/.tmux.conf delete_neovim ## delete and re-copy the neovim config file
-	mkdir -p $(HOME)/.config/nvim
-	cp -r $(PRJ)/neovim/* $(HOME)/.config/nvim
+neovim_config: ## clone kickstart.nvim into ~/.config/nvim (skipped if it already exists)
+	@if [[ -d $(HOME)/.config/nvim ]]; then \
+		echo "$(HOME)/.config/nvim exists; use 'make reset_neovim_config' to replace it"; \
+	else \
+		bash scripts/nvim-clone.sh; \
+	fi
 
-neovim: $(HOME)/.tmux.conf ## install neovim
+reset_neovim_config: $(HOME)/.tmux.conf delete_neovim ## delete the neovim config + plugin data and re-clone kickstart.nvim
+	@$(MAKE) neovim_config
+
+treesitter_cli: ## install or upgrade the tree-sitter CLI to the latest release (pin with TREESITTER_VERSION=x.y.z)
+	bash scripts/treesitter-cli.sh
+
+# mason installs pyright with npm; the nodejs target re-adds the apt repo with sudo, so only run it when node is missing
+neovim: $(HOME)/.tmux.conf treesitter_cli ## install neovim, tree-sitter, node (if missing) and the kickstart.nvim config
+	@command -v node >/dev/null || $(MAKE) nodejs
 	bash scripts/install_neovim.sh
-	@$(MAKE) reset_neovim_config
+	@$(MAKE) neovim_config
 
 uninstall_neovim: ## uninstall neovim version (make uninstall_neovim VERSION=0.12.3 or VERSION=all)
 	@if [ -z "$(VERSION)" ]; then \
@@ -313,7 +343,7 @@ uninstall_neovim: ## uninstall neovim version (make uninstall_neovim VERSION=0.1
 	fi
 	bash scripts/uninstall_neovim.sh $(VERSION)
 
-lazygit: ## install lazygit
+lazygit: ## install or overwrite lazygit with the latest release (pin with VERSION=x.y.z)
 	bash scripts/install_lazygit.sh
 
 ec2list: ## install ec2list
@@ -357,4 +387,4 @@ undo_edits: ## the build process has to edit files. run this to put things back
 
 remove-all: rm-bash rm-gpg rm-powerline rm-ssh-config rm-gitconfig ## destroy everything you love
 
-all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit golang docker nodejs sesh ## configure everything
+all: packages bin powerline bash gitconfig ssh-config kubectl pyenv lazygit golang docker nodejs sesh config_tmux nerdfonts ## configure everything

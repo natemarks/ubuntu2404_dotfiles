@@ -43,6 +43,9 @@ Run `make help` to see all available targets with descriptions.
 - **`make bash`** - Configure bash environment (symlink all `bashrc.d/` modules to `~/bashrc.d/`)
 - **`make bin`** - Symlink utility scripts from `bin/` to `~/bin` (encryption, AWS helpers, git utilities)
 - **`make powerline`** - Install and configure powerline themes and colorschemes
+- **`make nerdfonts`** - Install UbuntuSans Nerd Font to `~/.fonts` (powerline and icon glyphs)
+- **`make ptyxis`** - Set the ptyxis terminal font to the Nerd Font (Ubuntu 25.10+). Fully quit and reopen ptyxis afterwards
+- **`make gnome-terminal`** - Same as `ptyxis`, for gnome-terminal (Ubuntu 24.04)
 
 ### Tool Configuration
 
