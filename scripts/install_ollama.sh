@@ -2,6 +2,6 @@
 set -Eeuo pipefail
 
 # https://ollama.com/download/linux
-# Always re-runs the upstream installer so ollama is updated/overwritten to latest.
+# Pinned to a known-good version; bump OLLAMA_VERSION deliberately to upgrade.
 
-curl -fsSL https://ollama.com/install.sh | sh
+curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=0.23.3 sh

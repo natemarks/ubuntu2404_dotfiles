@@ -1,5 +1,5 @@
 {
-  "model": "claude-sonnet-5",
+  "model": "sonnet",
   "enabledPlugins": {
     "mattpocock-skills@claude-plugins-official": true,
     "miro@claude-plugins-official": true,
