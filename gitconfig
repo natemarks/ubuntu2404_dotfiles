@@ -11,5 +11,8 @@
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/usr/bin/gh auth git-credential
+# machine-specific overrides (e.g. a work [user] email); last so it wins; missing file is ignored
+[include]
+	path = ~/.gitconfig.local

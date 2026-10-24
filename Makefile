@@ -150,7 +150,17 @@ bash: ## configure bash environment
 	echo '. $(HOME)/.bashrc.local' >> $(HOME)/.bashrc
 	$(LN) $(PRJ)/bashrc.local $(HOME)/.bashrc.local
 
-gitconfig: ## deploy user gitconfig
+# a real ~/.gitconfig (e.g. written by `git config --global`) holds machine-specific settings:
+# keep it as ~/.gitconfig.local, which the repo gitconfig includes, or back it up if that exists
+gitconfig: ## symlink ~/.gitconfig; an existing real file is kept as ~/.gitconfig.local
+	@if [[ -f $(HOME)/.gitconfig && ! -L $(HOME)/.gitconfig ]]; then \
+		if [[ -e $(HOME)/.gitconfig.local ]]; then \
+			mv -v $(HOME)/.gitconfig $(HOME)/.gitconfig.$(EPOCH).backup; \
+		else \
+			mv -v $(HOME)/.gitconfig $(HOME)/.gitconfig.local; \
+		fi; \
+	fi
+	-rm -f $(HOME)/.gitconfig
 	$(LN) $(PRJ)/gitconfig $(HOME)/.gitconfig
 
 kubectl: ## install kubectl
@@ -301,7 +311,9 @@ $(HOME)/.tmux/plugins/tpm: ## clone tmux-plugins
 	git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm
 
 
-$(HOME)/.tmux.conf: $(HOME)/.tmux/plugins/tpm ## configure tmux
+# order-only (|): plugin updates touch the tpm dir's mtime, which would otherwise force a re-link
+$(HOME)/.tmux.conf: | $(HOME)/.tmux/plugins/tpm ## configure tmux
+	-rm -f $(HOME)/.tmux.conf
 	$(LN) $(PRJ)/tmux/tmux.conf $(HOME)/.tmux.conf
 
 # tpm reads the plugin list from ~/.tmux.conf, so it must be linked first
