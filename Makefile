@@ -256,6 +256,8 @@ packages: ## install required packages
 	fd-find \
 	sshfs \
 	imagemagick \
+	pulseaudio-utils \
+	sound-theme-freedesktop \
 	powerline \
 	python3-pip \
 	python3-powerline \
@@ -357,6 +359,12 @@ uninstall_neovim: ## uninstall neovim version (make uninstall_neovim VERSION=0.1
 
 lazygit: ## install or overwrite lazygit with the latest release (pin with VERSION=x.y.z)
 	bash scripts/install_lazygit.sh
+
+betterleaks: ## install or overwrite betterleaks with the latest release (pin with VERSION=x.y.z)
+	bash scripts/install_betterleaks.sh
+
+rustup: ## install or upgrade rustup and the default toolchain to the latest release
+	bash scripts/install_rustup.sh
 
 ec2list: ## install ec2list
 	bash scripts/install_ec2list.sh
