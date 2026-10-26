@@ -48,3 +48,305 @@ sso_session = imprivata
 region = us-east-1
 output = json
 
+
+[profile AdministratorAccess-709310380790]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 709310380790
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile AdministratorAccess-151924297945]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 151924297945
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile AdministratorAccess-468716396736]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 468716396736
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile AdministratorAccess-371143864265]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 371143864265
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[sso-session nonprod-imprivata]
+sso_start_url = https://imprivata-non-product.awsapps.com/start
+sso_region = us-east-1
+sso_registration_scopes = sso:account:access
+
+[profile jklep-admin]
+region = us-east-1
+output = json
+
+[profile ImprivataIT-749607070042]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 749607070042
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile tech-pubs-sso]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 690242320669
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile iid-js-bundle]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id =357655465940
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile beta-claude-code]
+sso_region = us-east-1
+sso_account_id = 368310207169
+sso_session = imprivata
+sso_role_name = BetaClaudeCode-StandardUser
+region = us-east-1
+output = json
+duration_seconds = 43200
+
+[profile beta-claude-power]
+sso_region = us-east-1
+sso_account_id = 368310207169
+sso_session = imprivata
+sso_role_name = BetaClaudeCode-PowerUser
+region = us-east-1
+output = json
+duration_seconds = 43200
+
+[profile claude-power]
+sso_region = us-east-1
+sso_account_id = 368310207169
+sso_session = imprivata
+sso_role_name = ClaudeCode-PowerUser
+region = us-east-1
+output = json
+duration_seconds = 43200
+
+[profile claude-standard]
+sso_region = us-east-1
+sso_account_id = 368310207169
+sso_session = imprivata
+sso_role_name = ClaudeCode-StandardUser
+region = us-east-1
+output = json
+duration_seconds = 43200
+
+[profile bedrock-dev]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 787222310730
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
+
+[profile bedrock-prod]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 183679576862
+sso_role_name = AdministratorAccess
+region = us-east-2
+output = json
+
+[profile bi-test-538263340534]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 538263340534
+sso_role_name = AdministratorAccess
+region = us-west-2
+output = json
+
+[profile bi-prod-882805240806]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 882805240806
+sso_role_name = AdministratorAccess
+region = us-east-2
+output = json
+
+[profile onesign-cloudops-159079727094]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 159079727094
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile it-infrastructure-568650999030]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 568650999030
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile digicert_epcs]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 874536229570
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile pcm_sandbox]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 014160138715
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile impr-it]
+region = us-east-1
+output = json
+
+[profile i-platform-dev]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 151924297945
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile nonprod-root]
+sso_session = nonprod-imprivata
+sso_region = us-east-1
+sso_account_id = 565362672438
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
+
+[profile nonprod-audit]
+sso_session = nonprod-imprivata
+sso_region = us-east-1
+sso_account_id = 707336479282
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
+
+[profile nonprod-archive]
+sso_session = nonprod-imprivata
+sso_region = us-east-1
+sso_account_id = 588436839923
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
+
+[profile nonprod-mam]
+sso_session = nonprod-imprivata
+sso_region = us-east-1
+sso_account_id = 665499489218
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
+
+[profile prod-audit]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 764772158374
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile prod-archive]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 893256823091
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
+
+[profile prod-root]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 261096313942
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile prod-eam-ami]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 601440148950
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
+
+[profile personal]
+region = us-east-1
+output = json
+
+[profile imprivata-nmarks]
+region = us-east-1
+output = json
+
+[profile production]
+sso_region = us-east-1
+sso_account_id = 468716396736
+sso_role_name = AdministratorAccess
+sso_session = imprivata
+region = us-east-1
+output = json
+
+[profile i-infrastructure]
+region = us-east-1
+output = json
+
+[profile imprivata-inc]
+region = us-east-1
+output = json
+
+[profile imprivata-sandbox]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 709310380790
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile imprivata-tdonfro]
+region = us-east-1
+output = json
+
+[profile cortext-feature]
+region = us-east-1
+output = json
+
+[profile customersupport-va]
+region = us-east-1
+output = json
+
+[profile imprivata-709310380790-AdministratorAccess]
+sso_session=imprivata
+sso_account_id=709310380790
+sso_role_name=AdministratorAccess
+
+[profile deleteme20240801]
+region = us-east-1
+output = json
+
+[profile AWSMarketplace]
+sso_session = imprivata
+sso_region = us-east-1
+sso_account_id = 301159439479
+sso_role_name = AWSAdministratorAccess
+region = us-east-1
+output = json
