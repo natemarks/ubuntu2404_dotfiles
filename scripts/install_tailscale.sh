@@ -21,6 +21,9 @@ fi
 
 sudo apt-get update
 sudo apt-get install -y tailscale
+# 'install' is a no-op when tailscale is already present; force the upgrade to latest
+sudo apt-get install -y --only-upgrade tailscale
+tailscale version
 
 
 # Start Tailscale with posture checking and route acceptance enabled

@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: gitconfig vim powerline neovim bin gh tmux_plugins sesh install_sesh config_tmux treesitter_cli neovim_config reset_neovim_config delete_neovim gnome-terminal nerdfonts ptyxis whisper whisper-clean bin/whisper-stream-bin
+.PHONY: gitconfig vim powerline neovim bin gh tailscale uv zoom tmux_plugins sesh install_sesh config_tmux treesitter_cli neovim_config reset_neovim_config delete_neovim gnome-terminal nerdfonts ptyxis whisper whisper-clean bin/whisper-stream-bin
 DEFAULT_BRANCH := main
 SHELL := /bin/bash
 PRJ := $(PWD)
@@ -168,6 +168,15 @@ kubectl: ## install kubectl
 
 gh: ## install github cli
 	bash scripts/install_gh_cli.sh
+
+tailscale: ## install or upgrade tailscale to the latest version
+	bash scripts/install_tailscale.sh
+
+uv: ## install or upgrade uv to the latest version
+	bash scripts/install_uv.sh
+
+zoom: ## install or upgrade zoom to the latest version
+	bash scripts/install_zoom.sh
 
 glow: ## install glow (markdown renderer)
 	bash scripts/install_glow.sh
