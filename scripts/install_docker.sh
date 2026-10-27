@@ -25,18 +25,24 @@ then
   sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 fi
 
-if [ ! -f /etc/apt/sources.list.d/docker.list ]
-then
-  echo \
-  "deb [arch=$(dpkg --print-architecture) \
-  signed-by=/etc/apt/keyrings/docker.gpg] \
-  https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-fi
+# always rewrite so the codename tracks the running release; a list file left
+# over from an earlier Ubuntu (e.g. noble after an upgrade) would go stale
+echo \
+"deb [arch=$(dpkg --print-architecture) \
+signed-by=/etc/apt/keyrings/docker.gpg] \
+https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
 sudo apt-get install -y \
+docker-ce \
+docker-ce-cli \
+containerd.io \
+docker-compose-plugin
+
+# 'install' is a no-op when docker is already present; force the upgrade to latest
+sudo apt-get install -y --only-upgrade \
 docker-ce \
 docker-ce-cli \
 containerd.io \
