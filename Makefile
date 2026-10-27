@@ -169,6 +169,9 @@ kubectl: ## install kubectl
 gh: ## install github cli
 	bash scripts/install_gh_cli.sh
 
+azure_cli: ## install or upgrade azure cli to the latest version
+	bash scripts/install_azure_cli.sh
+
 tailscale: ## install or upgrade tailscale to the latest version
 	bash scripts/install_tailscale.sh
 
