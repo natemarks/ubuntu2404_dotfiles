@@ -375,6 +375,11 @@ betterleaks: ## install or overwrite betterleaks with the latest release (pin wi
 rustup: ## install or upgrade rustup and the default toolchain to the latest release
 	bash scripts/install_rustup.sh
 
+cargo_tools: rustup ## install or upgrade standard cargo tools (cargo-audit, cargo-deny)
+	bash scripts/install_cargo_tools.sh
+
+rust: cargo_tools ## install rustup, toolchain components, and standard cargo tools
+
 ec2list: ## install ec2list
 	bash scripts/install_ec2list.sh
 

@@ -31,4 +31,7 @@ fi
 chmod +x "${tmpdir}/rustup-init"
 "${tmpdir}/rustup-init" -y --no-modify-path
 
+# neovim's rust-analyzer/clippy settings (see neovim config) expect these components
+"${HOME}/.cargo/bin/rustup" component add clippy rustfmt rust-analyzer
+
 echo "Installed $("${HOME}/.cargo/bin/rustup" --version 2>/dev/null)"
