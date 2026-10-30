@@ -312,9 +312,17 @@ gnome-terminal: nerdfonts ## configure gnome-terminal to use Nerd Font for icon 
 	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$$PROFILE/ font '$(TERMINAL_FONT)'
 	@echo "Done! Open a new gnome-terminal window to see the changes."
 
-claude_config: ## symlink Claude Code settings from repo
+claude_config: ## symlink Claude Code settings from repo (backs up an existing regular file)
+	$(MKDIR) $(HOME)/.claude
+	@if [ -f $(HOME)/.claude/settings.json ] && [ ! -L $(HOME)/.claude/settings.json ]; then \
+		cp -p $(HOME)/.claude/settings.json $(HOME)/.claude/settings.json.bak.$$(date +%Y%m%d%H%M%S); \
+		echo "backed up existing ~/.claude/settings.json"; \
+	fi
 	-rm -f $(HOME)/.claude/settings.json
 	$(LN) $(PRJ)/claude/settings.json $(HOME)/.claude/settings.json
+
+claude_plugins: ## install Claude Code plugins (AWS agent toolkit, mattpocock-skills)
+	bash $(PRJ)/scripts/install_claude_plugins.sh
 
 claude: nodejs configure_npm ## install claude cli
 	npm install -g @anthropic/claude-cli
