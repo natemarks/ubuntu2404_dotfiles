@@ -146,6 +146,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/kubectl_autocomplete.sh $(BASHRCD)/kubectl_autocomplete.sh
 	$(LN) $(PRJ)/bashrc.d/pyenv.sh $(BASHRCD)/pyenv.sh
 	$(LN) $(PRJ)/bashrc.d/claude.sh $(BASHRCD)/claude.sh
+	$(LN) $(PRJ)/bashrc.d/ollama.sh $(BASHRCD)/ollama.sh
 	sed -i.$(EPOCH) '/\.bashrc\.local/d' $(HOME)/.bashrc
 	echo '. $(HOME)/.bashrc.local' >> $(HOME)/.bashrc
 	$(LN) $(PRJ)/bashrc.local $(HOME)/.bashrc.local
@@ -184,7 +185,7 @@ zoom: ## install or upgrade zoom to the latest version
 glow: ## install glow (markdown renderer)
 	bash scripts/install_glow.sh
 
-ollama: ## install/update ollama (always overwrites with latest)
+ollama: ## install ollama (pinned) and run it as a user service with OLLAMA_MODELS=~/ollama-models
 	bash scripts/install_ollama.sh
 
 stayback: ## configure stayback

@@ -1,15 +1,19 @@
 AddKeysToAgent	yes
 IdentityFile ~/.ssh/id_ed25519
 
+
+
+
+
 # BEGIN nevergreen-docker-builder (managed by config/docker_builder.py)
-Host 3.213.49.97
+Host 52.73.215.96
     User ubuntu
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 # END nevergreen-docker-builder
 
 # BEGIN nevergreen-utility-instance (managed by config/utility_instance.py)
-Host 98.84.43.76
+Host 3.84.76.15
     User ubuntu
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null

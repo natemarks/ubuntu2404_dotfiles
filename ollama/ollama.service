@@ -1,0 +1,10 @@
+[Unit]
+Description=Ollama (user)
+
+[Service]
+ExecStart=/usr/local/bin/ollama serve
+Environment=OLLAMA_MODELS=%h/ollama-models
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
