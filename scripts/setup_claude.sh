@@ -51,14 +51,16 @@ mcp_add() {
 
 echo "Configuring Claude Code MCP servers (user scope)..."
 
+# The AWS MCP Server (aws-mcp) is installed by the aws-core plugin from the
+# Agent Toolkit for AWS (see scripts/install_claude_plugins.sh). AWS says to
+# remove these older servers so their tools don't conflict with it.
+for old in aws-docs aws-api-mcp-server aws-knowledge-mcp-server; do
+    claude mcp remove "$old" 2>/dev/null || true
+done
+
 mcp_add brave-search \
     -e "BRAVE_API_KEY=${BRAVE_API_KEY}" \
     -- npx -y @modelcontextprotocol/server-brave-search
-
-mcp_add aws-docs \
-    -e "FASTMCP_LOG_LEVEL=ERROR" \
-    -e "AWS_DOCUMENTATION_PARTITION=aws" \
-    -- uvx awslabs.aws-documentation-mcp-server@latest
 
 mcp_add aws-pricing \
     -e "FASTMCP_LOG_LEVEL=ERROR" \

@@ -1,19 +1,42 @@
 {
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_REGION": "us-east-1",
+    "AWS_PROFILE": "claude-code",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "us.anthropic.claude-sonnet-5-5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "us.anthropic.claude-opus-5-5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "us.anthropic.claude-haiku-5-5"
+  },
   "model": "sonnet",
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "mattpocock-skills@claude-plugins-official": true,
-    "miro@claude-plugins-official": true,
-    "local-notes@mcp-local-notes": true
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "aws-core@agent-toolkit-for-aws": true,
+    "atlassian@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "mcp-local-notes": {
+    "agent-toolkit-for-aws": {
       "source": {
         "source": "github",
-        "repo": "natemarks/mcp-local-notes"
+        "repo": "aws/agent-toolkit-for-aws"
       }
     }
   },
   "effortLevel": "high",
   "tui": "fullscreen",
+  "theme": "auto",
   "autoCompactEnabled": true
 }
