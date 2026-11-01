@@ -13,7 +13,7 @@ Host 52.73.215.96
 # END nevergreen-docker-builder
 
 # BEGIN nevergreen-utility-instance (managed by config/utility_instance.py)
-Host 3.84.76.15
+Host 54.86.148.110
     User ubuntu
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null

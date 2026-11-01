@@ -182,6 +182,9 @@ uv: ## install or upgrade uv to the latest version
 zoom: ## install or upgrade zoom to the latest version
 	bash scripts/install_zoom.sh
 
+chrome: ## install or upgrade google chrome from Google's apt repo
+	bash scripts/install_chrome.sh
+
 glow: ## install glow (markdown renderer)
 	bash scripts/install_glow.sh
 
