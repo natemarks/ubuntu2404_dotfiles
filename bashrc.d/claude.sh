@@ -8,7 +8,8 @@
 #
 # Usage:
 #   claude_bedrock    - switch current shell to Bedrock
-#   claude_anthropic  - switch current shell to Anthropic API
+#   claude_anthropic  - switch current shell to Anthropic API (relinks settings,
+#                       logs in if signed out)
 #   claude_backend    - show active backend
 
 claude_bedrock() {
@@ -19,6 +20,10 @@ claude_bedrock() {
     unset ANTHROPIC_API_KEY
 }
 
+# Repo root, resolved through the ~/bashrc.d symlink. The Makefile uses $PWD
+# for its paths, so make must be run from inside the repo.
+CLAUDE_DOTFILES_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+
 claude_anthropic() {
     unset CLAUDE_CODE_USE_BEDROCK
     unset AWS_PROFILE
@@ -28,6 +33,18 @@ claude_anthropic() {
     unset ANTHROPIC_DEFAULT_SONNET_MODEL
     unset ANTHROPIC_DEFAULT_OPUS_MODEL
     unset ANTHROPIC_DEFAULT_HAIKU_MODEL
+
+    # Relink ~/.claude/settings.json to the Anthropic settings; a settings-file
+    # env block overrides shell exports, so the link must match the backend.
+    if ! (cd "${CLAUDE_DOTFILES_DIR}" && make --no-print-directory claude_anthropic_settings); then
+        echo "claude_anthropic: failed to link anthropic settings" >&2
+        return 1
+    fi
+
+    # Login is interactive (opens a browser); the target skips it when already
+    # signed in. The email is not stored in the repo: export
+    # CLAUDE_ANTHROPIC_EMAIL from an untracked file such as ~/.bashrc.
+    (cd "${CLAUDE_DOTFILES_DIR}" && make --no-print-directory claude_login EMAIL="${CLAUDE_ANTHROPIC_EMAIL:-}")
 }
 
 claude_backend() {

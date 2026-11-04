@@ -324,6 +324,32 @@ claude_config: ## symlink Claude Code settings from repo (backs up an existing r
 	-rm -f $(HOME)/.claude/settings.json
 	$(LN) $(PRJ)/claude/settings.json $(HOME)/.claude/settings.json
 
+# Repoint ~/.claude/settings.json at claude/$(1); backs up a regular file first.
+define link_claude_settings
+	$(MKDIR) $(HOME)/.claude
+	@if [ -f $(HOME)/.claude/settings.json ] && [ ! -L $(HOME)/.claude/settings.json ]; then \
+		cp -p $(HOME)/.claude/settings.json $(HOME)/.claude/settings.json.bak.$$(date +%Y%m%d%H%M%S); \
+		echo "backed up existing ~/.claude/settings.json"; \
+	fi
+	-rm -f $(HOME)/.claude/settings.json
+	$(LN) $(PRJ)/claude/$(1) $(HOME)/.claude/settings.json
+endef
+
+claude_anthropic_settings: ## point ~/.claude/settings.json at claude/anthropic_settings.json (Anthropic API)
+	$(call link_claude_settings,anthropic_settings.json)
+
+claude_bedrock_settings: ## point ~/.claude/settings.json at claude/bedrock_settings.json (AWS Bedrock)
+	$(call link_claude_settings,bedrock_settings.json)
+
+claude_login: ## sign in to Anthropic if signed out (usage: make claude_login EMAIL=you@example.com)
+	@if claude auth status --json 2>/dev/null | python3 -c 'import json,sys; sys.exit(0 if json.load(sys.stdin).get("loggedIn") else 1)' 2>/dev/null; then \
+		echo "already signed in to Anthropic"; \
+	elif [ -z "$(EMAIL)" ]; then \
+		echo "signed out: run 'make claude_login EMAIL=you@example.com'" >&2; exit 1; \
+	else \
+		claude auth login --email "$(EMAIL)"; \
+	fi
+
 claude_plugins: ## install Claude Code plugins (AWS agent toolkit, mattpocock-skills)
 	bash $(PRJ)/scripts/install_claude_plugins.sh
 
