@@ -147,6 +147,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/pyenv.sh $(BASHRCD)/pyenv.sh
 	$(LN) $(PRJ)/bashrc.d/claude.sh $(BASHRCD)/claude.sh
 	$(LN) $(PRJ)/bashrc.d/ollama.sh $(BASHRCD)/ollama.sh
+	$(LN) $(PRJ)/bashrc.d/tailscale_aliases.sh $(BASHRCD)/tailscale_aliases.sh
 	sed -i.$(EPOCH) '/\.bashrc\.local/d' $(HOME)/.bashrc
 	echo '. $(HOME)/.bashrc.local' >> $(HOME)/.bashrc
 	$(LN) $(PRJ)/bashrc.local $(HOME)/.bashrc.local
