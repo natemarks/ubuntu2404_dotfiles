@@ -9,7 +9,7 @@ alias tsd='sudo tailscale down'
 TS_EXIT_NODE=100.84.119.96
 # `tailscale up` errors if any non-default flag is omitted, so every non-default
 # flag must be listed here and passed on each invocation of tsfull/tssplit.
-TS_BASE_FLAGS='--accept-routes=true --report-posture=true'
+TS_BASE_FLAGS='--accept-routes=true --report-posture=true --operator=nmarks'
 
 # Full tunnel: connect (if needed) and route all traffic via the exit node,
 # keeping the local LAN reachable.
