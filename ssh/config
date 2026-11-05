@@ -6,12 +6,8 @@ IdentityFile ~/.ssh/id_ed25519
 
 
 
-# BEGIN nevergreen-utility-instance (managed by config/utility_instance.py)
-Host 54.234.225.52
-    User ubuntu
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-# END nevergreen-utility-instance
+
+
 
 # BEGIN nevergreen-docker-builder (managed by config/docker_builder.py)
 Host 35.173.159.33
@@ -19,3 +15,10 @@ Host 35.173.159.33
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 # END nevergreen-docker-builder
+
+# BEGIN nevergreen-utility-instance (managed by config/utility_instance.py)
+Host 13.221.255.225
+    User ubuntu
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+# END nevergreen-utility-instance
