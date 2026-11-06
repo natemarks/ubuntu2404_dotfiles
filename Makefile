@@ -215,6 +215,7 @@ packages: ## install required packages
 	git \
 	tree \
 	feh \
+	age \
 	libimage-exiftool-perl \
 	fd-find \
 	make \
