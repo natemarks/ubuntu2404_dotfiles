@@ -148,6 +148,7 @@ bash: ## configure bash environment
 	$(LN) $(PRJ)/bashrc.d/claude.sh $(BASHRCD)/claude.sh
 	$(LN) $(PRJ)/bashrc.d/ollama.sh $(BASHRCD)/ollama.sh
 	$(LN) $(PRJ)/bashrc.d/tailscale_aliases.sh $(BASHRCD)/tailscale_aliases.sh
+	$(LN) $(PRJ)/bashrc.d/timer_functions.sh $(BASHRCD)/timer_functions.sh
 	sed -i.$(EPOCH) '/\.bashrc\.local/d' $(HOME)/.bashrc
 	echo '. $(HOME)/.bashrc.local' >> $(HOME)/.bashrc
 	$(LN) $(PRJ)/bashrc.local $(HOME)/.bashrc.local
@@ -222,6 +223,8 @@ packages: ## install required packages
 	wget \
 	zip \
 	vlc \
+	gnome-clocks \
+	pipewire-bin \
 	flatpak \
 	unzip \
 	nautilus-admin \
