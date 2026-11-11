@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: gitconfig vim powerline neovim bin gh tailscale uv zoom tmux_plugins sesh install_sesh config_tmux treesitter_cli neovim_config reset_neovim_config delete_neovim gnome-terminal nerdfonts ptyxis whisper whisper-clean bin/whisper-stream-bin
+.PHONY: gitconfig vim powerline neovim bin gh tailscale uv zoom slack tmux_plugins sesh install_sesh config_tmux treesitter_cli neovim_config reset_neovim_config delete_neovim gnome-terminal nerdfonts ptyxis whisper whisper-clean bin/whisper-stream-bin
 DEFAULT_BRANCH := main
 SHELL := /bin/bash
 PRJ := $(PWD)
@@ -183,6 +183,9 @@ uv: ## install or upgrade uv to the latest version
 
 zoom: ## install or upgrade zoom to the latest version
 	bash scripts/install_zoom.sh
+
+slack: ## install or upgrade slack to the latest version
+	bash scripts/install_slack.sh
 
 chrome: ## install or upgrade google chrome from Google's apt repo
 	bash scripts/install_chrome.sh
