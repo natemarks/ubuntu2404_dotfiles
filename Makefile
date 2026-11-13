@@ -421,6 +421,20 @@ lazygit: ## install or overwrite lazygit with the latest release (pin with VERSI
 betterleaks: ## install or overwrite betterleaks with the latest release (pin with VERSION=x.y.z)
 	bash scripts/install_betterleaks.sh
 
+aws_emulator: ## install or overwrite aws-emulator in ~/bin from AWS's signed .deb (no sudo, ~1 GB download)
+	bash scripts/install_aws_emulator.sh
+
+cfn_lint: uv ## install or upgrade cfn-lint to the latest release in ~/bin (pin with VERSION=x.y.z)
+	bash scripts/install_cfn_lint.sh
+
+cfn_validate: ## install or overwrite cfn-validate with the latest release (pin with VERSION=x.y.z)
+	bash scripts/install_cfn_validate.sh
+
+cfn_guard: ## install or overwrite cfn-guard with the latest release (pin with VERSION=x.y.z)
+	bash scripts/install_cfn_guard.sh
+
+aws_dev_tools: aws_emulator cfn_lint cfn_validate cfn_guard ## install aws-emulator, cfn-lint, cfn-validate and cfn-guard in ~/bin
+
 rustup: ## install or upgrade rustup and the default toolchain to the latest release
 	bash scripts/install_rustup.sh
 
