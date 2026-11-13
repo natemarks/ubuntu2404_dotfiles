@@ -69,5 +69,9 @@
   "effortLevel": "high",
   "tui": "fullscreen",
   "theme": "auto",
+  "statusLine": {
+    "type": "command",
+    "command": "jq -r '.workspace.current_dir // .cwd' | sed \"s|^$HOME|~|\""
+  },
   "autoCompactEnabled": true
 }
