@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-export PATH=~/bin/go/1.26.5/go/bin:~/go/bin:$PATH
+export PATH=~/bin/go/1.27.4/go/bin:~/go/bin:$PATH
