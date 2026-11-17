@@ -446,6 +446,9 @@ rust: cargo_tools ## install rustup, toolchain components, and standard cargo to
 ec2list: ## install ec2list
 	bash scripts/install_ec2list.sh
 
+hybrid_utils: ## install or overwrite hybrid_utils (ecs-tasks, task-images, ...) with the latest release (pin with VERSION=vX.Y.Z)
+	bash scripts/install_hybrid_utils.sh
+
 bin/whisper-stream-bin: ## install whisper.cpp (whisper-stream for voice transcription)
 	bash scripts/install_whisper.sh
 
