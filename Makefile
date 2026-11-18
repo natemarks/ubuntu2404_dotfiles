@@ -447,6 +447,9 @@ rust: cargo_tools ## install rustup, toolchain components, and standard cargo to
 ec2list: ## install ec2list
 	bash scripts/install_ec2list.sh
 
+hali: ## install or overwrite hali in ~/bin from the newest tarball in ~/projects/hali/dist (override with HALI_DIST_DIR=)
+	bash scripts/install_hali.sh
+
 hybrid_utils: ## install or overwrite hybrid_utils (ecs-tasks, task-images, ...) with the latest release (pin with VERSION=vX.Y.Z)
 	bash scripts/install_hybrid_utils.sh
 
