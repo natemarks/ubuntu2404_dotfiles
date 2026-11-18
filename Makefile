@@ -220,6 +220,7 @@ packages: ## install required packages
 	tree \
 	feh \
 	age \
+	pre-commit \
 	libimage-exiftool-perl \
 	fd-find \
 	make \
