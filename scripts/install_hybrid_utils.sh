@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Installs the latest hybrid_utils release (task-images, ecs-tasks, immutable-ecr, ecr-lifecycle) to ~/bin,
-# overwriting existing binaries. Set VERSION=vX.Y.Z to install a specific release instead.
+# Installs the latest hybrid_utils release by running the install.sh bundled in its linux_amd64 tarball,
+# so new executables added to a release are installed without editing this script.
+# Set VERSION=vX.Y.Z to install a specific release instead.
 # The repo is private, so this needs an authenticated gh (GitHub CLI).
 # Release assets are hybrid_utils_[<commit>_]linux_amd64.tar.gz; older releases omit the commit and
-# newer ones nest the files in a directory, so the binaries are located with find.
+# newer ones nest the files in a directory, so install.sh is located with find.
 REPO="imprivata-cloud/hybrid_utils"
-INSTALL_DIR="${HOME}/bin"
-BINARIES=("task-images" "ecs-tasks" "immutable-ecr" "ecr-lifecycle")
 
 if ! command -v gh >/dev/null 2>&1; then
   echo "ERROR: gh (GitHub CLI) is required but not installed" >&2
@@ -42,17 +41,17 @@ if [[ ${#tarballs[@]} -ne 1 ]]; then
 fi
 
 extract_dir="${tmpdir}/extract"
-mkdir -p "${extract_dir}" "${INSTALL_DIR}"
+mkdir -p "${extract_dir}"
 tar -xzf "${tarballs[0]}" -C "${extract_dir}"
 
-for binary in "${BINARIES[@]}"; do
-  src="$(find "${extract_dir}" -type f -name "${binary}" -print -quit)"
-  if [[ -z "${src}" ]]; then
-    echo "WARNING: ${binary} not found in ${VERSION} (it may have been added in a later release)" >&2
-    continue
-  fi
-  install -m 0755 "${src}" "${INSTALL_DIR}/${binary}"
-  echo "Installed ${binary} to ${INSTALL_DIR}/${binary}"
-done
+installer="$(find "${extract_dir}" -type f -name install.sh -print -quit)"
+if [[ -z "${installer}" ]]; then
+  echo "ERROR: no install.sh found in the ${VERSION} tarball (older releases may not ship one)" >&2
+  exit 1
+fi
 
-echo "Installed hybrid_utils ${VERSION} to ${INSTALL_DIR}"
+# run from the installer's own directory; it locates the files it installs relative to itself
+echo "Running install.sh from the ${VERSION} tarball"
+(cd "$(dirname "${installer}")" && bash ./install.sh)
+
+echo "Installed hybrid_utils ${VERSION}"
