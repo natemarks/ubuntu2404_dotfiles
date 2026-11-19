@@ -56,7 +56,8 @@
     "mattpocock-skills@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "aws-core@agent-toolkit-for-aws": true,
-    "atlassian@claude-plugins-official": true
+    "atlassian@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "agent-toolkit-for-aws": {
