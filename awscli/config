@@ -40,6 +40,30 @@ sso_session = imprivata
 region = us-east-1
 output = json
 
+[profile icp-dev]
+sso_region = us-east-1
+sso_account_id = 652624129461
+sso_role_name = AdministratorAccess 
+sso_session = imprivata
+region = us-east-1
+output = json
+
+[profile icp-qe]
+sso_region = us-east-1
+sso_account_id = 224729789906
+sso_role_name = AdministratorAccess 
+sso_session = imprivata
+region = us-east-1
+output = json
+
+[profile icp-sandbox]
+sso_region = us-east-1
+sso_account_id = 741537373320
+sso_role_name = AdministratorAccess 
+sso_session = imprivata
+region = us-east-1
+output = json
+
 [profile patient-access-qe]
 sso_region = us-east-1
 sso_account_id = 857181482034
