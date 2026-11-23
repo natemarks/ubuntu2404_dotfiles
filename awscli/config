@@ -32,6 +32,14 @@ sso_session = imprivata
 region = us-east-1
 output = json
 
+[profile mam-dev]
+sso_region = us-east-1
+sso_account_id = 767809123366
+sso_role_name = AdministratorAccess 
+sso_session = imprivata
+region = us-east-1
+output = json
+
 [profile patient-access-qe]
 sso_region = us-east-1
 sso_account_id = 857181482034
